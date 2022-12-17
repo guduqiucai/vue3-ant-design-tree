@@ -1,4 +1,5 @@
 <template>
+  <!-- 这里可以写两个根节点，是因为Vue3解析模板的时候加了一个虚拟根节点 -->
   <header>
     ant-design-vue tree 增删改
   </header>
@@ -83,11 +84,13 @@ function slotDelete(nodeData) {
   parentNode.value = nodeData
 }
 
+// 确认删除当前节点
 function confirmDel() {
   Object.assign(parentNode.value.dataRef, null)
   searchOption(parentNode.value.dataRef, treeData.value)
 }
 
+//  递归查找操作的节点，在父节点的children中删除
 function searchOption (option, arr, obj = {}) {
   //首先循环arr最外层数据
   for (let s = 0; s < arr.length; s++) {
@@ -105,6 +108,7 @@ function searchOption (option, arr, obj = {}) {
   }
 }
 
+// 弹框
 const openNotification = (msg) => {
   notification.open({
     message: 'tree value',
@@ -116,6 +120,7 @@ const openNotification = (msg) => {
   });
 };
 
+// 获取当前树的值
 function getTreeData() {
   let details = toRaw(treeData.value)
   console.log(details)
@@ -125,7 +130,6 @@ function getTreeData() {
 </script>
 
 <style scoped>
-
 header {
   display: flex;
   justify-content: center;
